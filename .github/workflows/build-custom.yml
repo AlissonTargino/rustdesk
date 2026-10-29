@@ -5,6 +5,9 @@ on:
     branches: [custom-build]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     uses: ./.github/workflows/flutter-build.yml
