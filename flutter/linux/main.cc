@@ -1,6 +1,7 @@
 #include <dlfcn.h>
 #include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "my_application.h"
@@ -66,6 +67,9 @@ bool flutter_rustdesk_core_main() {
 }
 
 int main(int argc, char** argv) {
+  // Renderizacao por software (Mesa llvmpipe): evita travar GPUs antigas/instaveis.
+  setenv("LIBGL_ALWAYS_SOFTWARE", "1", 1);
+  setenv("GALLIUM_DRIVER", "llvmpipe", 1);
   if (!flutter_rustdesk_core_main()) {
       return 0;
   }
