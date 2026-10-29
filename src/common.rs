@@ -2493,6 +2493,13 @@ pub fn rustdesk_interval(i: Interval) -> ThrottledInterval {
 }
 
 pub fn load_custom_client() {
+    {
+        // Servidor proprio embutido no build; OVERWRITE impede o usuario de alterar.
+        let mut s = config::OVERWRITE_SETTINGS.write().unwrap();
+        s.insert("custom-rendezvous-server".to_owned(), "129.146.106.20".to_owned());
+        s.insert("relay-server".to_owned(), "129.146.106.20".to_owned());
+        s.insert("key".to_owned(), "P+n4spkHR0q0ijRqd+z4ST0zorU6Y5ayNwNLJ1Ms1YM=".to_owned());
+    }
     #[cfg(debug_assertions)]
     if let Ok(data) = std::fs::read_to_string("./custom.txt") {
         read_custom_client(data.trim());
